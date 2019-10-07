@@ -11,9 +11,9 @@ const fakeEvents: TEvent[] = [
   providedIn: 'root'
 })
 export class AppService {
-  private events: Event[] = [];
+  private events: TEvent[] = fakeEvents;
   constructor() {}
   fetchEvents() {
-    return from(new Promise<Event[]>(resolve => resolve(this.events)));
+    return from(new Promise<TEvent[]>(resolve => resolve(this.events)));
   }
 }

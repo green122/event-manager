@@ -1,0 +1,25 @@
+mat-card {
+  background: white;
+  color: #4a4a4a;
+}
+
+.event-card {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.action-icon {
+  color: darkgray;
+}
+
+.event-card {
+  .card-actions {
+    opacity: 0;
+    transition: opacity ease-in 0.3s;
+  }
+  &:hover {
+    .card-actions {
+      opacity: 1;
+    }
+  }
+}

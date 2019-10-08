@@ -1,1 +1,3 @@
-<p>event-editor works!</p>
+<app-form-manager [event]="event$ | async">
+  <app-basic-event-form #formContent></app-basic-event-form>
+</app-form-manager>

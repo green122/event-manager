@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { EventService } from './app.service';
+import { EventService } from './event.service';
 
 describe('AppService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

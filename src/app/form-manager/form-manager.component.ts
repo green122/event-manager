@@ -1,5 +1,5 @@
-import { Component, OnInit, ContentChildren, QueryList, AfterContentChecked, ChangeDetectionStrategy } from '@angular/core';
-import { IForm } from '../models/app.model';
+import { Component, OnInit, ContentChildren, QueryList, AfterContentChecked, ChangeDetectionStrategy, Input } from '@angular/core';
+import { IForm, TEvent } from '../models/app.model';
 
 @Component({
   selector: 'app-form-manager',
@@ -8,6 +8,7 @@ import { IForm } from '../models/app.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormManagerComponent implements OnInit, AfterContentChecked {
+  @Input() event: TEvent;
   @ContentChildren('formContent') forms: QueryList<IForm>;
   constructor() {}
 

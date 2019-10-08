@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { tap } from 'rxjs/operators';
+import { ActivatedRoute, Router, Params } from '@angular/router';
+import { tap, switchMap, catchError } from 'rxjs/operators';
+import { EventService } from '../event.service';
+import { TEvent } from '../models/app.model';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-event-editor',
@@ -8,15 +11,27 @@ import { tap } from 'rxjs/operators';
   styleUrls: ['./event-editor.component.scss']
 })
 export class EventEditorComponent implements OnInit {
+
+  event$: Observable<TEvent>;
+
   constructor(
     private readonly router: Router,
-    private readonly route: ActivatedRoute
-    ) {
-    console.log('222222');
-    }
+    private readonly route: ActivatedRoute,
+    private readonly eventService: EventService
+  ) {}
 
   ngOnInit() {
-    this.route.params.pipe(tap(console.log)).subscribe();
-    this.router.navigate(['/']);
+    this.event$ = this.route.params
+      .pipe(
+        switchMap(value => this.eventService.getEventById(value.id)),
+        catchError(() => {
+          this.router.navigate(['/']);
+          return of({} as TEvent);
+        })
+      )
+  }
+
+  fillForm = (event: TEvent) => {
+    console.log(event);
   }
 }

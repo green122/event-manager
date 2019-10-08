@@ -28,13 +28,21 @@ const fakeEvents: TEvent[] = [
 export class EventService {
   private events: TEvent[] = fakeEvents;
 
-  private event$  = new BehaviorSubject<TEvent[]>(fakeEvents);
+  private events$ = new BehaviorSubject<TEvent[]>(fakeEvents);
   constructor() {}
   fetchEvents() {
-    return this.event$;
+    return this.events$;
   }
-  deleteId(deleteId: string) {
-    const newEvents = this.events.filter(({id}) => id !== deleteId);
-    this.event$.next(newEvents);
+  deleteEventId(eventId: string) {
+    const newEvents = this.events.filter(({ id }) => id !== eventId);
+    this.events$.next(newEvents);
+  }
+  getEventById(eventId: string) {
+    const event = this.events.find(({ id }) => id === eventId);
+    return from(
+      new Promise<TEvent>((resolve, reject) =>
+        event ? resolve(event) : reject('Event wasnt found')
+      )
+    );
   }
 }

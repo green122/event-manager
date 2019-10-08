@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TEvent } from '../models/app.model';
-import { EventService } from '../app.service';
+import { EventService } from '../event.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -14,7 +14,7 @@ export class EventListComponent implements OnInit {
   constructor(private readonly eventService: EventService) {}
 
   onDelete(id: string){
-    this.eventService.deleteId(id);
+    this.eventService.deleteEventId(id);
   }
 
   onEdit(id: string){

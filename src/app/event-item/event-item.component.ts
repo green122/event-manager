@@ -1,14 +1,18 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 import { TEvent, EventType } from '../models/app.model';
 
 @Component({
   selector: 'app-event-item',
   templateUrl: './event-item.component.html',
-  styleUrls: ['./event-item.component.scss']
+  styleUrls: ['./event-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventItemComponent implements OnInit {
   @Input() event: TEvent;
   EventType = EventType;
+
+  @Output() deleteHandler = new EventEmitter<string>();
+  @Output() editHandler = new EventEmitter<string>();
 
   constructor() {}
   ngOnInit() {}

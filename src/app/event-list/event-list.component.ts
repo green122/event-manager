@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TEvent } from '../models/app.model';
+import { EventService } from '../app.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-event-list',
@@ -7,12 +9,19 @@ import { TEvent } from '../models/app.model';
   styleUrls: ['./event-list.component.scss']
 })
 export class EventListComponent implements OnInit {
+  events$: Observable<TEvent[]>;
 
-  @Input() events: TEvent[] = [];
+  constructor(private readonly eventService: EventService) {}
 
-  constructor() { }
-
-  ngOnInit() {
+  onDelete(id: string){
+    this.eventService.deleteId(id);
   }
 
+  onEdit(id: string){
+    console.log(id);
+  }
+
+  ngOnInit() {
+    this.events$ = this.eventService.fetchEvents();
+  }
 }

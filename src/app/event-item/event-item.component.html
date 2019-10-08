@@ -13,13 +13,13 @@
     </p>
   </mat-card-content>
   <mat-card-actions class="card-actions">
-    <button mat-raised-button>
+    <button mat-raised-button (click)="editHandler.emit(event.id)">
       <mat-icon class="action-icon">edit</mat-icon>
       Edit
     </button>
-    <button mat-raised-button>
+    <button mat-raised-button (click)="deleteHandler.emit(event.id)">
       <mat-icon class="action-icon">delete</mat-icon>
-      Edit
+      Delete
     </button>
   </mat-card-actions>
 </mat-card>

@@ -1,4 +1,9 @@
-<app-event-item *ngFor="let event of events" [event]="event"></app-event-item>
+<app-event-item
+  *ngFor="let event of events$ | async; trackBy:event && event.id"
+  [event]="event"
+  (deleteHandler)="onDelete($event)"
+  (editHandler)="onEdit($event)"
+></app-event-item>
 <app-form-manager>
-    <app-basic-event-form #formContent></app-basic-event-form>
+  <app-basic-event-form #formContent></app-basic-event-form>
 </app-form-manager>

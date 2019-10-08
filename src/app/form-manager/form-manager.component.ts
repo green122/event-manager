@@ -1,12 +1,13 @@
-import { Component, OnInit, ContentChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ContentChildren, QueryList, AfterContentChecked, ChangeDetectionStrategy } from '@angular/core';
 import { IForm } from '../models/app.model';
 
 @Component({
   selector: 'app-form-manager',
   templateUrl: './form-manager.component.html',
-  styleUrls: ['./form-manager.component.scss']
+  styleUrls: ['./form-manager.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormManagerComponent implements OnInit {
+export class FormManagerComponent implements OnInit, AfterContentChecked {
   @ContentChildren('formContent') forms: QueryList<IForm>;
   constructor() {}
 

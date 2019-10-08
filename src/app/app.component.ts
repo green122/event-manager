@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AppService } from './app.service';
+import { EventService } from './app.service';
 import { Observable } from 'rxjs';
 import { TEvent } from './models/app.model';
 
@@ -10,11 +10,9 @@ import { TEvent } from './models/app.model';
 })
 export class AppComponent implements OnInit {
   title = 'event-mngr';
-  events: Observable<TEvent[]>;
-  constructor(public appService: AppService) {
+  constructor(public eventService: EventService) {
   }
 
   ngOnInit(): void {
-    this.events = this.appService.fetchEvents();
   }
 }

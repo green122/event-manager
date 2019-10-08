@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { from } from 'rxjs';
+import { from, BehaviorSubject } from 'rxjs';
 import { TEvent, EventType } from './models/app.model';
 
 const fakeEvents: TEvent[] = [
@@ -12,7 +12,7 @@ const fakeEvents: TEvent[] = [
     participants: []
   },
   {
-    id: '000',
+    id: '001',
     type: EventType.MEETING,
     name: 'name',
     eventDate: new Date(),
@@ -25,10 +25,16 @@ const fakeEvents: TEvent[] = [
 @Injectable({
   providedIn: 'root'
 })
-export class AppService {
+export class EventService {
   private events: TEvent[] = fakeEvents;
+
+  private event$  = new BehaviorSubject<TEvent[]>(fakeEvents);
   constructor() {}
   fetchEvents() {
-    return from(new Promise<TEvent[]>(resolve => resolve(this.events)));
+    return this.event$;
+  }
+  deleteId(deleteId: string) {
+    const newEvents = this.events.filter(({id}) => id !== deleteId);
+    this.event$.next(newEvents);
   }
 }

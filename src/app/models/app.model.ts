@@ -1,5 +1,11 @@
+export enum EventType {
+  CALL = 'Call',
+  MEETING = 'Meeting'
+}
 
 interface IEventBase {
+  id: string;
+  type: EventType;
   name: string;
   eventDate: Date;
   createdDate: Date;
@@ -22,5 +28,8 @@ export interface IMeeting extends IEventBase {
   participants: IMeetingParticipant[];
 }
 
-
 export type TEvent = ICall | IMeeting;
+
+export interface IForm {
+  getForm: () => void;
+}

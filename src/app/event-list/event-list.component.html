@@ -1,1 +1,4 @@
-<app-event-item *ngFor="let event of events">{{event.name}}</app-event-item>
+<app-event-item *ngFor="let event of events" [event]="event"></app-event-item>
+<app-form-manager>
+    <app-basic-event-form #formContent></app-basic-event-form>
+</app-form-manager>

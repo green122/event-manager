@@ -7,13 +7,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EventListComponent } from './event-list/event-list.component';
 import { EventItemComponent } from './event-item/event-item.component';
 import { EventEditorComponent } from './event-editor/event-editor.component';
+import { FormManagerComponent } from './form-manager/form-manager.component';
+import { BasicEventFormComponent } from './basic-event-form/basic-event-form.component';
+import { MeetingItemComponent } from './meeting-item/meeting-item.component';
+import { CallItemComponent } from './call-item/call-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EventListComponent,
     EventItemComponent,
-    EventEditorComponent
+    EventEditorComponent,
+    FormManagerComponent,
+    BasicEventFormComponent,
+    MeetingItemComponent,
+    CallItemComponent
   ],
   imports: [
     BrowserModule,

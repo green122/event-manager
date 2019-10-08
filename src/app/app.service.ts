@@ -1,10 +1,25 @@
 import { Injectable } from '@angular/core';
 import { from } from 'rxjs';
-import { TEvent } from './models/app.model';
+import { TEvent, EventType } from './models/app.model';
 
 const fakeEvents: TEvent[] = [
-  { name: 'name', eventDate: new Date(), createdDate: new Date(), participants: []},
-  { name: 'name', eventDate: new Date(), createdDate: new Date(), participants: [], address: 'fakeAddress'}
+  {
+    id: '000',
+    type: EventType.CALL,
+    name: 'name',
+    eventDate: new Date(),
+    createdDate: new Date(),
+    participants: []
+  },
+  {
+    id: '000',
+    type: EventType.MEETING,
+    name: 'name',
+    eventDate: new Date(),
+    createdDate: new Date(),
+    participants: [],
+    address: 'fakeAddress'
+  }
 ];
 
 @Injectable({

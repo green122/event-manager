@@ -9,8 +9,7 @@ import { TEvent } from './models/app.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'event-mngr';
-  constructor(public eventService: EventService) {
+  constructor() {
   }
 
   ngOnInit(): void {

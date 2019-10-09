@@ -1,4 +1,5 @@
-<app-form-manager [event]="event$ | async">
+<app-form-manager [event]="event$ | async" (submitData)="submitData($event)">
   <app-basic-event-form #formContent></app-basic-event-form>
   <app-call-form #formContent></app-call-form>
 </app-form-manager>
+

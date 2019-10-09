@@ -1,1 +1,10 @@
-<p>call-form works!</p>
+<form [formGroup]="form">
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Participant 1</mat-label>
+    <input matInput placeholder="Name" formControlName="participant1" />
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Participant 2</mat-label>
+    <input matInput placeholder="Name" formControlName="participant2" />
+  </mat-form-field>
+</form>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-call-form',
@@ -14,8 +14,8 @@ export class CallFormComponent implements OnInit {
   ngOnInit() {
     this.form = this.formBuilder.group(
       {
-        participant1: 'Jackie Chan',
-        participant2: 'Darth Weider'
+        participant1: '', // ['', Validators.compose([Validators.required, Validators.email])],
+        participant2: ''
       }
     );
   }

@@ -17,7 +17,7 @@ export class BasicEventFormComponent implements OnInit, IForm {
     this.form = this.formBuilder.group(
       {
         name: ['John', Validators.required],
-        eventData: '01/01/01'
+        eventDate: '01/01/01'
       }
     );
   }

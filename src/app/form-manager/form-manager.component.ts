@@ -5,10 +5,14 @@ import {
   QueryList,
   ChangeDetectionStrategy,
   Input,
-  AfterContentInit
+  AfterContentInit,
+  EventEmitter,
+  Output
 } from '@angular/core';
 import { IForm, TEvent } from '../models/app.model';
 import { FormArray, FormBuilder } from '@angular/forms';
+import { Observable, from } from 'rxjs';
+import { tap, map, startWith, withLatestFrom, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-form-manager',
@@ -19,17 +23,31 @@ import { FormArray, FormBuilder } from '@angular/forms';
 export class FormManagerComponent implements OnInit, AfterContentInit {
   @Input() event: TEvent;
   @ContentChildren('formContent') formsChildren: QueryList<IForm>;
+  @Output() submitData = new EventEmitter<any>();
+
+  onSubmit = new EventEmitter<void>();
+  isFormInvalid$: Observable<boolean>;
 
   form: FormArray;
   constructor(private readonly formBuilder: FormBuilder) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
 
   ngAfterContentInit(): void {
     this.form = this.formBuilder.array(
       this.formsChildren.map(form => form.getForm())
     );
-    this.form.statusChanges.subscribe(console.log);
-    this.form.valueChanges.subscribe(console.log);
+    this.isFormInvalid$ = this.form.statusChanges.pipe(
+      map(status => status === 'INVALID'),
+      startWith(this.form.invalid)
+    );
+    this.onSubmit
+      .pipe(
+        withLatestFrom(this.form.valueChanges),
+        take(1)
+      )
+      .subscribe(value => this.submitData.emit(value));
   }
 }

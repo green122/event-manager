@@ -1,2 +1,4 @@
 <ng-content></ng-content>
+<button mat-raised-button (click)="onSubmit.emit()" [disabled]="isFormInvalid$ | async">Create Event</button>
+
 

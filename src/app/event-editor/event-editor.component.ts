@@ -11,8 +11,10 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./event-editor.component.scss']
 })
 export class EventEditorComponent implements OnInit {
-
   event$: Observable<TEvent>;
+  submitData(data) {
+    console.log(data);
+  }
 
   constructor(
     private readonly router: Router,
@@ -21,14 +23,13 @@ export class EventEditorComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.event$ = this.route.params
-      .pipe(
-        switchMap(value => this.eventService.getEventById(value.id)),
-        catchError(() => {
-          this.router.navigate(['/']);
-          return of({} as TEvent);
-        })
-      )
+    this.event$ = this.route.params.pipe(
+      switchMap(value => this.eventService.getEventById(value.id)),
+      catchError(() => {
+        this.router.navigate(['/']);
+        return of({} as TEvent);
+      })
+    );
   }
 
   fillForm = (event: TEvent) => {

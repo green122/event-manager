@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { IForm } from '../models/app.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-basic-event-form',
@@ -9,12 +10,19 @@ import { IForm } from '../models/app.model';
 })
 export class BasicEventFormComponent implements OnInit, IForm {
 
-  constructor() { }
+  form: FormGroup;
+  constructor(private readonly formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.form = this.formBuilder.group(
+      {
+        name: ['John', Validators.required],
+        eventData: '01/01/01'
+      }
+    );
   }
 
   getForm() {
-    console.log('!!!!!!!!!!!!!!');
+    return this.form;
   }
 }

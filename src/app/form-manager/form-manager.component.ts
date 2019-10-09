@@ -1,5 +1,14 @@
-import { Component, OnInit, ContentChildren, QueryList, AfterContentChecked, ChangeDetectionStrategy, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ContentChildren,
+  QueryList,
+  ChangeDetectionStrategy,
+  Input,
+  AfterContentInit
+} from '@angular/core';
 import { IForm, TEvent } from '../models/app.model';
+import { FormArray, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-form-manager',
@@ -7,16 +16,20 @@ import { IForm, TEvent } from '../models/app.model';
   styleUrls: ['./form-manager.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormManagerComponent implements OnInit, AfterContentChecked {
+export class FormManagerComponent implements OnInit, AfterContentInit {
   @Input() event: TEvent;
-  @ContentChildren('formContent') forms: QueryList<IForm>;
-  constructor() {}
+  @ContentChildren('formContent') formsChildren: QueryList<IForm>;
+
+  form: FormArray;
+  constructor(private readonly formBuilder: FormBuilder) {}
 
   ngOnInit() {}
 
-  ngAfterContentChecked(): void {
-    // Called after every check of the component's or directive's content.
-    // Add 'implements AfterContentChecked' to the class.
-    this.forms.map(form => form.getForm());
+  ngAfterContentInit(): void {
+    this.form = this.formBuilder.array(
+      this.formsChildren.map(form => form.getForm())
+    );
+    this.form.statusChanges.subscribe(console.log);
+    this.form.valueChanges.subscribe(console.log);
   }
 }

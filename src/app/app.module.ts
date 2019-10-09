@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +12,7 @@ import { FormManagerComponent } from './form-manager/form-manager.component';
 import { BasicEventFormComponent } from './basic-event-form/basic-event-form.component';
 import { MeetingItemComponent } from './meeting-item/meeting-item.component';
 import { CallItemComponent } from './call-item/call-item.component';
+import { CallFormComponent } from './call-form/call-form.component';
 
 @NgModule({
   declarations: [
@@ -21,15 +23,18 @@ import { CallItemComponent } from './call-item/call-item.component';
     FormManagerComponent,
     BasicEventFormComponent,
     MeetingItemComponent,
-    CallItemComponent
+    CallItemComponent,
+    CallFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [FormBuilder],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

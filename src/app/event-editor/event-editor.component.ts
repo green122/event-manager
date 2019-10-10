@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { tap, switchMap, catchError } from 'rxjs/operators';
+import {
+  tap,
+  switchMap,
+  catchError,
+  map,
+  takeUntil,
+  takeWhile
+} from 'rxjs/operators';
 import { EventService } from '../event.service';
-import { TEvent } from '../models/app.model';
+import { TEvent, AbstractFormData } from '../models/app.model';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -12,8 +19,20 @@ import { Observable, of } from 'rxjs';
 })
 export class EventEditorComponent implements OnInit {
   event$: Observable<TEvent>;
-  submitData(data) {
-    console.log(data);
+  id: string;
+
+  submitData(data: AbstractFormData) {
+    this.eventService.updateDataById(this.id, data as TEvent).pipe(
+      map(() => {
+        this.router.navigate(['/']);
+        return true;
+      }),
+      takeWhile(Boolean),
+      catchError(err => {
+        console.log(err);
+        return of(err);
+      })
+    ).subscribe();
   }
 
   constructor(
@@ -24,7 +43,10 @@ export class EventEditorComponent implements OnInit {
 
   ngOnInit() {
     this.event$ = this.route.params.pipe(
-      switchMap(value => this.eventService.getEventById(value.id)),
+      switchMap(value => {
+        this.id = value.id;
+        return this.eventService.getEventById(value.id);
+      }),
       catchError(() => {
         this.router.navigate(['/']);
         return of({} as TEvent);

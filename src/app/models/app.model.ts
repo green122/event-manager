@@ -11,11 +11,11 @@ interface IEventBase {
   createdDate: Date;
 }
 
-interface ICallParticipant {
+export interface ICallParticipant {
   email: string;
 }
 
-interface IMeetingParticipant {
+export interface IMeetingParticipant {
   name: string;
 }
 
@@ -32,4 +32,9 @@ export type TEvent = ICall | IMeeting;
 
 export interface IForm {
   getForm: () => void;
+  setValue: (event: TEvent) => void;
+}
+
+export interface AbstractFormData {
+  [key: string]: any;
 }

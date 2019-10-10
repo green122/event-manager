@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { IForm } from '../models/app.model';
+import { IForm, TEvent } from '../models/app.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -24,5 +24,10 @@ export class BasicEventFormComponent implements OnInit, IForm {
 
   getForm() {
     return this.form;
+  }
+
+  setValue(event: TEvent) {
+    const { name, eventDate } = event;
+    this.form.patchValue({name, eventDate});
   }
 }

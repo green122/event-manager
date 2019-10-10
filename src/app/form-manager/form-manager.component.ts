@@ -13,6 +13,7 @@ import { IForm, TEvent } from '../models/app.model';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { Observable, from } from 'rxjs';
 import { tap, map, startWith, withLatestFrom, take } from 'rxjs/operators';
+import { FormManagerService } from './form-manager.service';
 
 @Component({
   selector: 'app-form-manager',
@@ -21,7 +22,9 @@ import { tap, map, startWith, withLatestFrom, take } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormManagerComponent implements OnInit, AfterContentInit {
-  @Input() event: TEvent;
+  @Input() set event(event: TEvent) {
+    this.setValuesToChildrenForms(event);
+  }
   @ContentChildren('formContent') formsChildren: QueryList<IForm>;
   @Output() submitData = new EventEmitter<any>();
 
@@ -29,10 +32,17 @@ export class FormManagerComponent implements OnInit, AfterContentInit {
   isFormInvalid$: Observable<boolean>;
 
   form: FormArray;
-  constructor(private readonly formBuilder: FormBuilder) {}
+  constructor(
+    private readonly formBuilder: FormBuilder,
+    private readonly formService: FormManagerService
+  ) {}
 
-  ngOnInit() {
+  ngOnInit() {}
 
+  setValuesToChildrenForms(event: TEvent) {
+    if (this.formsChildren) {
+      this.formsChildren.forEach(childForm => childForm.setValue(event));
+    }
   }
 
   ngAfterContentInit(): void {
@@ -45,9 +55,10 @@ export class FormManagerComponent implements OnInit, AfterContentInit {
     );
     this.onSubmit
       .pipe(
-        withLatestFrom(this.form.valueChanges),
-        take(1)
+        withLatestFrom(this.form.valueChanges)
       )
-      .subscribe(value => this.submitData.emit(value));
+      .subscribe(([_, value]) => {
+        this.submitData.emit(this.formService.prepareOutputFormData(value));
+      });
   }
 }

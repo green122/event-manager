@@ -45,8 +45,16 @@ export class EventService {
       )
     );
   }
-  updateDataById(eventId: string, eventData: TEvent) {
-    const eventIndex = this.events.findIndex(({ id }) => id === eventId);
+
+  createEvent = (eventData: TEvent) => {
+    const id = String(Date.now());
+    this.events.push({ ...eventData, id });
+    this.events$.next(this.events);
+    return from(new Promise(resolve => resolve()));
+  }
+
+  updateEvent(eventData: TEvent) {
+    const eventIndex = this.events.findIndex(({ id }) => id === eventData.id);
     return from(
       new Promise<TEvent>((resolve, reject) => {
         if (eventIndex > -1) {

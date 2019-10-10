@@ -5,7 +5,8 @@ import { EventListComponent } from './event-list/event-list.component';
 
 
 const routes: Routes = [
-  { path: 'edit/:id', component: EventEditorComponent },
+  { path: 'edit/:id', component: EventEditorComponent,  data: {create: false } },
+  { path: 'create', component: EventEditorComponent, data: {create: true} },
   { path: '**', component: EventListComponent }
 ];
 

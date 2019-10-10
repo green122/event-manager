@@ -25,6 +25,7 @@ export class FormManagerComponent implements OnInit, AfterContentInit {
   @Input() set event(event: TEvent) {
     this.setValuesToChildrenForms(event);
   }
+  @Input() submitText: string;
   @ContentChildren('formContent') formsChildren: QueryList<IForm>;
   @Output() submitData = new EventEmitter<any>();
 

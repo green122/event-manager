@@ -16,8 +16,8 @@ export class BasicEventFormComponent implements OnInit, IForm {
   ngOnInit() {
     this.form = this.formBuilder.group(
       {
-        name: ['John', Validators.required],
-        eventDate: '01/01/01'
+        name: ['', Validators.required],
+        eventDate: ''
       }
     );
   }

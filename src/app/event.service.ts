@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { from, BehaviorSubject } from 'rxjs';
+import { from, BehaviorSubject, Observable, of } from 'rxjs';
 import { TEvent, EventType, ICall, AbstractFormData } from './models/app.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { take } from 'rxjs/operators';
 
 const fakeEvents: TEvent[] = [
   {
@@ -30,7 +32,7 @@ export class EventService {
   private draft: EventType | '' = '';
 
   private events$ = new BehaviorSubject<TEvent[]>(fakeEvents);
-  constructor() {}
+  constructor(private snackBar: MatSnackBar) {}
   fetchEvents() {
     return this.events$.asObservable();
   }
@@ -52,13 +54,30 @@ export class EventService {
   }
 
   getEventType() {
-    return from(new Promise<EventType | ''>(resolve => resolve(this.draft)));
+    return Promise.resolve(this.draft);
+  }
+
+  getEventAfterCreateHook(eventData: TEvent): Observable<any> {
+    return eventData.type === EventType.CALL
+      ? from(
+          new Promise(() => {
+            setTimeout(() => {
+              this.snackBar.open('Emails have been successfully sent', null, {
+                duration: 2000
+              });
+            }, 2000);
+          })
+        )
+      : of({});
   }
 
   createEvent = (eventData: TEvent) => {
     const id = String(Date.now());
     this.events.push({ ...eventData, id });
     this.events$.next(this.events);
+    this.getEventAfterCreateHook(eventData)
+      .pipe(take(1))
+      .subscribe();
     return from(new Promise(resolve => resolve()));
   }
 

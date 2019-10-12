@@ -25,7 +25,7 @@ export class CallFormComponent implements OnInit, IForm {
 
   setValues(event: TEvent) {
     const { participants } = event as ICall;
-    if (!participants.length) {
+    if (!participants || !participants.length) {
       return;
     }
     this.form.patchValue([participants[0].email, participants[1].email]);

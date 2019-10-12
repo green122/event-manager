@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { EventEditorComponent } from '../event-editor/event-editor.component';
@@ -14,7 +14,8 @@ export class EventEntryDialogComponent implements OnInit {
     private readonly router: Router,
     private readonly eventService: EventService,
     public dialog: MatDialog,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly changeDetector: ChangeDetectorRef
   ) {
     this.openDialog();
   }
@@ -27,6 +28,7 @@ export class EventEntryDialogComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.router.navigate(['/']);
+      this.changeDetector.detectChanges();
     });
   }
 

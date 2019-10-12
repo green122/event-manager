@@ -1,6 +1,6 @@
 <mat-dialog-title
   >
-  <p class="dialog-title-text">Create {{ type$ | async }}</p>
+  <p class="dialog-title-text">Create {{ type }}</p>
   <div class="icon-wrapper">
     <mat-icon mat-dialog-close>close</mat-icon>
   </div>
@@ -8,8 +8,8 @@
 <div class="editor-container">
   <app-form-manager
     [event]="event$ | async"
-    [type]="type$ | async"
-    [submitText]="getSubmitText(type$ | async)"
+    [type]="type"
+    [submitText]="getSubmitText(type)"
     (submitData)="submitData($event)"
   >
     <app-basic-event-form #formContent></app-basic-event-form>

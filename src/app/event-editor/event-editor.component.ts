@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { switchMap, catchError, map, takeWhile, tap } from 'rxjs/operators';
 import { EventService } from '../event.service';
@@ -15,7 +15,7 @@ export class EventEditorComponent implements OnInit {
   event$: Observable<TEvent>;
   create: boolean;
   id: string;
-  type$: Observable<EventType | ''>;
+  type: EventType | '';
 
   eventType = EventType;
 
@@ -24,7 +24,7 @@ export class EventEditorComponent implements OnInit {
       ? this.eventService.createEvent
       : this.eventService.updateEvent;
 
-    eventFunction({ ...formData, id: this.id } as TEvent)
+    eventFunction({ ...formData, id: this.id, type: this.type } as TEvent)
       .pipe(
         map(() => {
           this.dialogRef.close();
@@ -42,7 +42,8 @@ export class EventEditorComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<EventEditorComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private readonly eventService: EventService
+    private readonly eventService: EventService,
+    private readonly changeDetector: ChangeDetectorRef
   ) {
     this.create = data.create;
     this.id = data.id;
@@ -53,12 +54,13 @@ export class EventEditorComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.type$ = this.eventService.getEventType().pipe(
-      tap(type => {
-        if (this.create && !type) {
+    this.eventService.getEventType().then(
+      draft => {
+        if (this.create && !draft) {
           this.dialogRef.close();
         }
-      })
+        this.type = draft;
+      }
     );
 
     this.event$ = !this.create

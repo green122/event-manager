@@ -17,10 +17,11 @@ export class BasicEventFormComponent implements OnInit, IForm {
     this.form = this.formBuilder.group(
       {
         name: ['', Validators.required],
-        eventDate: ''
+        eventDate: '',
+        eventTime: ''
       }
     );
-  }
+   }
 
   getForm() {
     return this.form;

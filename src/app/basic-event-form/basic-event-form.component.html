@@ -12,5 +12,10 @@
     />
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+   
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <input matInput mode="time" placeholder="Event time" hidden />
+      <dp-date-picker matInput mode="time" placeholder="Event time" formControlName="eventTime" theme="dp-material" ></dp-date-picker>
+    </mat-form-field>
 </form>

@@ -16,6 +16,7 @@ import { CallFormComponent } from './call-form/call-form.component';
 import { EventEntryDialogComponent } from './event-entry-dialog/event-entry-dialog.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
+import {DpDatePickerModule} from 'ng2-date-picker';
 import { EventsComponent } from './events/events.component';
 
 @NgModule({
@@ -36,6 +37,7 @@ import { EventsComponent } from './events/events.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    DpDatePickerModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,

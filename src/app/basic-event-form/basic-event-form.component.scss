@@ -1,3 +1,11 @@
 .mat-form-field {
-    display: block;
+  display: block;
+}
+
+dp-date-picker ::ng-deep {
+  .dp-picker-input {
+    background: none;
+    border: none;
+    font-size: 14px;
+  }
 }

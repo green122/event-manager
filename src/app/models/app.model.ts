@@ -32,7 +32,8 @@ export type TEvent = ICall | IMeeting;
 
 export interface IForm {
   getForm: () => void;
-  setValue: (event: TEvent) => void;
+  setValues: (event: TEvent) => void;
+  getValues: () => AbstractFormData;
 }
 
 export interface AbstractFormData {

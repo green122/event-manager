@@ -29,7 +29,6 @@ export class FormManagerComponent implements OnInit, AfterContentInit {
   @ContentChildren('formContent') formsChildren: QueryList<IForm>;
   @Output() submitData = new EventEmitter<any>();
 
-  onSubmit = new EventEmitter<void>();
   isFormInvalid$: Observable<boolean>;
 
   form: FormArray;
@@ -42,8 +41,13 @@ export class FormManagerComponent implements OnInit, AfterContentInit {
 
   setValuesToChildrenForms(event: TEvent) {
     if (this.formsChildren) {
-      this.formsChildren.forEach(childForm => childForm.setValue(event));
+      this.formsChildren.forEach(childForm => childForm.setValues(event));
     }
+  }
+
+  onSubmit() {
+    const collectedData = this.formsChildren.map(childForm => childForm.getValues());
+    this.submitData.emit(this.formService.prepareOutputFormData(collectedData));
   }
 
   ngAfterContentInit(): void {
@@ -54,12 +58,5 @@ export class FormManagerComponent implements OnInit, AfterContentInit {
       map(status => status === 'INVALID'),
       startWith(this.form.invalid)
     );
-    this.onSubmit
-      .pipe(
-        withLatestFrom(this.form.valueChanges)
-      )
-      .subscribe(([_, value]) => {
-        this.submitData.emit(this.formService.prepareOutputFormData(value));
-      });
   }
 }

@@ -26,8 +26,12 @@ export class BasicEventFormComponent implements OnInit, IForm {
     return this.form;
   }
 
-  setValue(event: TEvent) {
+  setValues(event: TEvent) {
     const { name, eventDate } = event;
     this.form.patchValue({name, eventDate});
+  }
+
+  getValues() {
+    return this.form.value;
   }
 }

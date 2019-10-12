@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { TEvent } from '../models/app.model';
 import { EventService } from '../event.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event-list',
@@ -11,14 +12,17 @@ import { Observable } from 'rxjs';
 export class EventListComponent implements OnInit {
   events$: Observable<TEvent[]>;
 
-  constructor(private readonly eventService: EventService) {}
+  constructor(
+    private readonly eventService: EventService,
+    private readonly router: Router
+  ) {}
 
-  onDelete(id: string){
+  onDelete(id: string) {
     this.eventService.deleteEventId(id);
   }
 
-  onEdit(id: string){
-    console.log(id);
+  onEdit(id: string) {
+    this.router.navigate(['edit', id]);
   }
 
   ngOnInit() {

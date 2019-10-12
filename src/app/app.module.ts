@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +13,10 @@ import { BasicEventFormComponent } from './basic-event-form/basic-event-form.com
 import { MeetingItemComponent } from './meeting-item/meeting-item.component';
 import { CallItemComponent } from './call-item/call-item.component';
 import { CallFormComponent } from './call-form/call-form.component';
+import { EventEntryDialogComponent } from './event-entry-dialog/event-entry-dialog.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { EventsComponent } from './events/events.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,9 @@ import { CallFormComponent } from './call-form/call-form.component';
     BasicEventFormComponent,
     MeetingItemComponent,
     CallItemComponent,
-    CallFormComponent
+    CallFormComponent,
+    EventEntryDialogComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,
@@ -32,9 +38,13 @@ import { CallFormComponent } from './call-form/call-form.component';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    MatDialogModule,
+    MatNativeDateModule,
   ],
+  entryComponents: [EventEditorComponent],
   providers: [FormBuilder],
+  schemas: [NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

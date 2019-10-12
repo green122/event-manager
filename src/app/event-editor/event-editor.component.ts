@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { switchMap, catchError, map, takeWhile } from 'rxjs/operators';
 import { EventService } from '../event.service';
 import { TEvent, AbstractFormData } from '../models/app.model';
 import { Observable, of } from 'rxjs';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-event-editor',
@@ -20,10 +21,11 @@ export class EventEditorComponent implements OnInit {
       ? this.eventService.createEvent
       : this.eventService.updateEvent;
 
-    eventFunction(data as TEvent)
+    eventFunction({ ...data, id: this.data.id } as TEvent)
       .pipe(
         map(() => {
           this.router.navigate(['/']);
+          this.dialogRef.close();
           return true;
         }),
         takeWhile(Boolean),
@@ -36,17 +38,17 @@ export class EventEditorComponent implements OnInit {
   }
 
   constructor(
+    public dialogRef: MatDialogRef<EventEditorComponent>,
     private readonly router: Router,
-    private readonly route: ActivatedRoute,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private readonly eventService: EventService
   ) {}
 
   ngOnInit() {
-    this.create = this.route.snapshot.data.create;
-    this.id = this.route.snapshot.params.id;
-
-    this.event$ = !this.create
-      ? this.eventService.getEventById(this.id).pipe(
+    const create = this.data.create;
+    const id = this.data.id;
+    this.event$ = !create
+      ? this.eventService.getEventById(id).pipe(
           catchError(() => {
             this.router.navigate(['/']);
             return of({} as TEvent);

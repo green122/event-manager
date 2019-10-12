@@ -1,7 +1,7 @@
 <ng-content></ng-content>
 <button
   mat-raised-button
-  (click)="onSubmit.emit()"
+  (click)="onSubmit()"
   [disabled]="isFormInvalid$ | async"
 >
   {{submitText}}

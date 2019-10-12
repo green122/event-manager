@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { TEvent, IForm, ICall } from '../models/app.model';
 // import { get } from 'lodash';
 
@@ -9,29 +9,29 @@ import { TEvent, IForm, ICall } from '../models/app.model';
   styleUrls: ['./call-form.component.scss']
 })
 export class CallFormComponent implements OnInit, IForm {
-  form: FormGroup;
+  form: FormArray;
   constructor(private readonly formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      participant1: '', // ['', Validators.compose([Validators.required, Validators.email])],
-      participant2: ''
-    });
+    this.form = this.formBuilder.array(
+      ['', '']
+      // ['', Validators.compose([Validators.required, Validators.email])],
+    );
   }
 
   getForm() {
     return this.form;
   }
 
-  setValue(event: TEvent) {
-    console.log(event);
+  setValues(event: TEvent) {
     const { participants } = event as ICall;
     if (!participants.length) {
       return;
     }
-    this.form.patchValue({
-      participant1: participants[0].email,
-      participant2: participants[1].email
-    });
+    this.form.patchValue([participants[0].email, participants[1].email]);
+  }
+
+  getValues() {
+    return { participants: this.form.value.map(email => ({ email })) };
   }
 }

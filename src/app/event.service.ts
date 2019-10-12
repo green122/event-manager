@@ -27,6 +27,7 @@ const fakeEvents: TEvent[] = [
 })
 export class EventService {
   private events: TEvent[] = fakeEvents;
+  private draft: EventType | '' = '';
 
   private events$ = new BehaviorSubject<TEvent[]>(fakeEvents);
   constructor() {}
@@ -46,6 +47,14 @@ export class EventService {
     );
   }
 
+  createEventDraft(type: EventType) {
+    this.draft = type;
+  }
+
+  getEventType() {
+   return this.draft;
+  }
+
   createEvent = (eventData: TEvent) => {
     const id = String(Date.now());
     this.events.push({ ...eventData, id });
@@ -53,7 +62,7 @@ export class EventService {
     return from(new Promise(resolve => resolve()));
   }
 
-  updateEvent(eventData: TEvent) {
+  updateEvent = (eventData: TEvent) => {
     const eventIndex = this.events.findIndex(({ id }) => id === eventData.id);
     return from(
       new Promise<TEvent>((resolve, reject) => {

@@ -52,7 +52,7 @@ export class EventService {
   }
 
   getEventType() {
-   return this.draft;
+    return from(new Promise<EventType | ''>(resolve => resolve(this.draft)));
   }
 
   createEvent = (eventData: TEvent) => {

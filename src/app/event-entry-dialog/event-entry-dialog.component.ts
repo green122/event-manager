@@ -22,13 +22,6 @@ export class EventEntryDialogComponent implements OnInit {
   openDialog() {
     const create = this.route.snapshot.data.create;
     const id = this.route.snapshot.params.id;
-
-    const eventType = this.eventService.getEventType();
-    if (create && !eventType) {
-      this.router.navigate(['/']);
-      return;
-    }
-
     const dialogRef = this.dialog.open(EventEditorComponent, {
       data: {create, id}
     });

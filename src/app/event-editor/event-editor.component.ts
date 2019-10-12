@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { switchMap, catchError, map, takeWhile } from 'rxjs/operators';
+import { switchMap, catchError, map, takeWhile, tap } from 'rxjs/operators';
 import { EventService } from '../event.service';
-import { TEvent, AbstractFormData } from '../models/app.model';
+import { TEvent, AbstractFormData, EventType } from '../models/app.model';
 import { Observable, of } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -13,18 +13,20 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class EventEditorComponent implements OnInit {
   event$: Observable<TEvent>;
+  create: boolean;
   id: string;
-  create = false;
+  type$: Observable<EventType | ''>;
 
-  submitData(data: AbstractFormData) {
+  eventType = EventType;
+
+  submitData(formData: AbstractFormData) {
     const eventFunction = this.create
       ? this.eventService.createEvent
       : this.eventService.updateEvent;
 
-    eventFunction({ ...data, id: this.data.id } as TEvent)
+    eventFunction({ ...formData, id: this.id } as TEvent)
       .pipe(
         map(() => {
-          this.router.navigate(['/']);
           this.dialogRef.close();
           return true;
         }),
@@ -39,18 +41,30 @@ export class EventEditorComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<EventEditorComponent>,
-    private readonly router: Router,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private readonly eventService: EventService
-  ) {}
+  ) {
+    this.create = data.create;
+    this.id = data.id;
+  }
+
+  getSubmitText(type: EventType) {
+    return this.create ? `Create ${type}` : `Update ${type}`;
+  }
 
   ngOnInit() {
-    const create = this.data.create;
-    const id = this.data.id;
-    this.event$ = !create
-      ? this.eventService.getEventById(id).pipe(
+    this.type$ = this.eventService.getEventType().pipe(
+      tap(type => {
+        if (this.create && !type) {
+          this.dialogRef.close();
+        }
+      })
+    );
+
+    this.event$ = !this.create
+      ? this.eventService.getEventById(this.id).pipe(
           catchError(() => {
-            this.router.navigate(['/']);
+            this.dialogRef.close();
             return of({} as TEvent);
           })
         )

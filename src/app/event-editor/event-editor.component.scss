@@ -1,8 +1,23 @@
 .editor-container {
   position: relative;
+  @media (min-width: 1200px) {
+    width: 600px;
+  }
+}
+.icon-wrapper {
+  position: relative;
+  width: 100%;
   mat-icon {
     cursor: pointer;
     position: absolute;
     right: 0;
+  }
+}
+
+mat-dialog-title {
+  display: flex;
+  .dialog-title-text {
+    width: 100px;
+    margin: 0;
   }
 }

@@ -1,5 +1,5 @@
 
-<mat-card class="event-card">
+<mat-card class="event-card" [ngClass]="{meeting: event.type === EventType.MEETING}">
   <ng-container [ngSwitch]="event.type">
     <app-call-item *ngSwitchCase="EventType.CALL" [event]="event"></app-call-item>
     <app-meeting-item *ngSwitchCase="EventType.MEETING" [event]="event"></app-meeting-item>

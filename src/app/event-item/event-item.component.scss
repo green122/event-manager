@@ -9,12 +9,8 @@ mat-card-actions {
   top: 10px;
 }
 
-.mat-card-footer{
+.mat-card-footer {
   margin: 0;
-}
-
-.event-card {
-  margin-bottom: 10px;
 }
 
 .action-icon {
@@ -22,6 +18,14 @@ mat-card-actions {
 }
 
 .event-card {
+  background-color: aliceblue;
+  margin-bottom: 10px;
+  &:first-child {
+    margin-top: 10px;
+  }
+  &.meeting {
+    background-color: ivory;
+  }
   .card-actions {
     opacity: 0.3;
     transition: opacity ease-in 0.3s;

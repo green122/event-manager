@@ -1,4 +1,11 @@
 .container {
   width: 70%;
   margin: 50px auto;
+  @media(min-width: 1200px) {
+    width: 60%;
+  }
+
+  @media(min-width: 1400px) {
+    width: 50%;
+  }
 }

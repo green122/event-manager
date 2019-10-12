@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { TEvent } from '../models/app.model';
 
 
 @Component({
@@ -7,6 +8,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./call-item.component.scss']
 })
 export class CallItemComponent {
-
+  @Input() event: TEvent;
 
 }

@@ -3,8 +3,17 @@ mat-card {
   color: #4a4a4a;
 }
 
+mat-card-actions {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+
+.mat-card-footer{
+  margin: 0;
+}
+
 .event-card {
-  display: flex;
   margin-bottom: 10px;
 }
 
@@ -22,4 +31,9 @@ mat-card {
       opacity: 0.8;
     }
   }
+}
+
+app-call-item,
+app-meeting-item {
+  display: flex;
 }

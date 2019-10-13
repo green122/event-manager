@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { TEvent, IForm, ICall } from '../models/app.model';
+import { TEvent, IForm, ICall, IMeeting } from '../models/app.model';
 // import { get } from 'lodash';
 
 @Component({
@@ -27,15 +27,15 @@ export class MeetingFormComponent implements OnInit, IForm {
   }
 
   setValues(event: TEvent) {
-    const { participants } = event as ICall;
+    const { participants, address } = event as IMeeting;
     if (!participants || !participants.length) {
       return;
     }
     this.form.patchValue({
       participants: [
-        participants[0].email,
-        participants[1].email,
-        participants[2].email
+        participants[0].name,
+        participants[1].name,
+        participants[2].name
       ]
     });
   }

@@ -9,8 +9,22 @@ mat-card-actions {
   top: 10px;
 }
 
+.card-title {
+  display: flex;
+  mat-icon {
+    margin-right: 10px;
+  }
+}
+
+.event-name {
+  font-size: 16px;
+  font-weight: bolder;
+}
+
 .mat-card-footer {
-  margin: 0;
+  margin: 10px 10px 0 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .action-icon {
@@ -37,7 +51,4 @@ mat-card-actions {
   }
 }
 
-app-call-item,
-app-meeting-item {
-  display: flex;
-}
+

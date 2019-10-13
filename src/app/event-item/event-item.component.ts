@@ -21,14 +21,37 @@ export class EventItemComponent implements OnInit {
   @Output() deleteHandler = new EventEmitter<string>();
   @Output() editHandler = new EventEmitter<string>();
 
-  dateString(date: Date) {
-    return date.toLocaleDateString('en-EN', {
+  dateString() {
+    if (!this.event) {
+      return;
+    }
+    const { eventDate, eventTime } = this.event;
+    const dateLocale = eventDate.toLocaleDateString('en-EN', {
       year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      weekday: 'long'
+    });
+    const dateTimeZone = eventDate
+      .toLocaleDateString('en-EN', {
+        timeZoneName: 'short'
+      })
+      .split(' ')
+      .slice(1);
+    return `${dateLocale} ${eventTime} ${dateTimeZone}`;
+  }
+
+  createdDateString() {
+    if (!this.event) {
+      return;
+    };
+    return this.event.createdDate.toLocaleDateString('en-EN', {
+      year: 'numeric',
+      month: 'short',
       day: 'numeric',
       weekday: 'long',
       hour: '2-digit',
-      minute: '2-digit',
-      timeZoneName: 'short'
+      minute: '2-digit'
     });
   }
   constructor() {}

@@ -28,8 +28,8 @@ export class BasicEventFormComponent implements OnInit, IForm {
   }
 
   setValues(event: TEvent) {
-    const { name, eventDate } = event;
-    this.form.patchValue({name, eventDate});
+    const { name, eventDate, eventTime } = event;
+    this.form.patchValue({name, eventDate, eventTime});
   }
 
   getValues() {

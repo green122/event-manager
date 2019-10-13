@@ -1,7 +1,5 @@
-<mat-card-header>
-  <mat-card-title> {{ event.name }}</mat-card-title>
-</mat-card-header>
 <mat-card-content>
+  <span class="participants-label">Participants: </span>
   <mat-chip-list>
     <mat-chip>{{ event.participants[0].email }}</mat-chip>
     <mat-chip>{{ event.participants[1].email }}</mat-chip>

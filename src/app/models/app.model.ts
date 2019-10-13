@@ -8,6 +8,7 @@ interface IEventBase {
   type: EventType;
   name: string;
   eventDate: Date;
+  eventTime: string;
   createdDate: Date;
 }
 

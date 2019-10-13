@@ -1,5 +1,14 @@
 mat-card-header ::ng-deep {
   .mat-card-header-text {
-    margin: 0 10px 0 0;    
+    margin: 0 10px 0 0;
   }
+}
+
+mat-card-content {
+  display: flex;
+}
+
+.participants-label {
+  padding: 10px;
+  display: inline-block;
 }

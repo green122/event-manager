@@ -10,6 +10,7 @@ const fakeEvents: TEvent[] = [
     type: EventType.CALL,
     name: 'nameAAA',
     eventDate: new Date(),
+    eventTime: '07:34:10',
     createdDate: new Date(),
     participants: [{ email: 'ww@cc.com' }, { email: 'dd@dd.cc' }]
   },
@@ -17,10 +18,11 @@ const fakeEvents: TEvent[] = [
     id: '001',
     type: EventType.MEETING,
     name: 'name',
+    eventTime: '07:34:00',
     eventDate: new Date(),
     createdDate: new Date(),
-    participants: [{ email: 'ww@cc.com' }, { email: 'dd@dd.cc' }, { email: 'ww@cc.com' }],
-    address: 'fakeAddress'
+    participants: [{ name: 'ww@cc.com' }, { name: 'dd@dd.cc' }, { name: 'ww@cc.com' }],
+    address: 'Potsdamer Platz'
   }
 ];
 
@@ -72,8 +74,9 @@ export class EventService {
   }
 
   createEvent = (eventData: TEvent) => {
-    const id = String(Date.now());
-    this.events.push({ ...eventData, id });
+    const createdDate = new Date();
+    const id = String(createdDate);
+    this.events.push({ ...eventData, id, createdDate });
     this.events$.next(this.events);
     this.getEventAfterCreateHook(eventData)
       .pipe(take(1))
@@ -94,5 +97,10 @@ export class EventService {
         }
       })
     );
+  }
+
+  goToMapApp(address: string){
+    const addressRequest = address.replace(/\s\s+/g, '+');
+    window.open(`//maps.google.com/maps/search/${addressRequest}`, '_blank');
   }
 }

@@ -1,8 +1,21 @@
-
-<mat-card class="event-card" [ngClass]="{meeting: event.type === EventType.MEETING}">
+<mat-card
+  class="event-card"
+  [ngClass]="{ meeting: event.type === EventType.MEETING }"
+>
+  <div class="card-title">
+    <mat-icon>{{event.type === EventType.CALL ? 'phone' : 'people'}}</mat-icon>
+    <mat-card-title>{{ event.type }}</mat-card-title>
+  </div>
+    <mat-card-subtitle class="event-name">{{ event.name }}</mat-card-subtitle>
   <ng-container [ngSwitch]="event.type">
-    <app-call-item *ngSwitchCase="EventType.CALL" [event]="event"></app-call-item>
-    <app-meeting-item *ngSwitchCase="EventType.MEETING" [event]="event"></app-meeting-item>
+    <app-call-item
+      *ngSwitchCase="EventType.CALL"
+      [event]="event"
+    ></app-call-item>
+    <app-meeting-item
+      *ngSwitchCase="EventType.MEETING"
+      [event]="event"
+    ></app-meeting-item>
   </ng-container>
   <mat-card-actions class="card-actions">
     <button mat-raised-button (click)="editHandler.emit(event.id)">
@@ -14,5 +27,8 @@
       Delete
     </button>
   </mat-card-actions>
-  <mat-card-footer>{{dateString(event.eventDate)}}</mat-card-footer>
+  <mat-divider [inset]="true"></mat-divider>
+  <mat-card-footer><span class="event-date">{{ dateString() }}</span>
+    <span class="event-date">Created At: {{ createdDateString() }}</span>
+  </mat-card-footer>
 </mat-card>

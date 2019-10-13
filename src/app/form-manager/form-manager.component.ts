@@ -22,9 +22,7 @@ import { FormManagerService } from './form-manager.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormManagerComponent implements OnInit, AfterContentInit {
-  @Input() set event(event: TEvent) {
-    this.setValuesToChildrenForms(event);
-  }
+  @Input() event: TEvent;
   @Input() submitText: string;
   @ContentChildren('formContent') formsChildren: QueryList<IForm>;
   @Output() submitData = new EventEmitter<any>();
@@ -46,7 +44,9 @@ export class FormManagerComponent implements OnInit, AfterContentInit {
   }
 
   onSubmit() {
-    const collectedData = this.formsChildren.map(childForm => childForm.getValues());
+    const collectedData = this.formsChildren.map(childForm =>
+      childForm.getValues()
+    );
     this.submitData.emit(this.formService.prepareOutputFormData(collectedData));
   }
 
@@ -54,6 +54,7 @@ export class FormManagerComponent implements OnInit, AfterContentInit {
     this.form = this.formBuilder.array(
       this.formsChildren.map(form => form.getForm())
     );
+    setTimeout(() => this.setValuesToChildrenForms(this.event));
     this.isFormInvalid$ = this.form.statusChanges.pipe(
       map(status => status === 'INVALID'),
       startWith(this.form.invalid)

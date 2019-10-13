@@ -19,7 +19,7 @@ const fakeEvents: TEvent[] = [
     name: 'name',
     eventDate: new Date(),
     createdDate: new Date(),
-    participants: [{ email: 'ww@cc.com' }, { email: 'dd@dd.cc' }],
+    participants: [{ email: 'ww@cc.com' }, { email: 'dd@dd.cc' }, { email: 'ww@cc.com' }],
     address: 'fakeAddress'
   }
 ];
@@ -54,7 +54,7 @@ export class EventService {
   }
 
   getEventType() {
-    return Promise.resolve(this.draft);
+    return this.draft;
   }
 
   getEventAfterCreateHook(eventData: TEvent): Observable<any> {

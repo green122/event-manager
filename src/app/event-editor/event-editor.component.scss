@@ -16,8 +16,9 @@
 
 mat-dialog-title {
   display: flex;
+  margin-bottom: 10px;
   .dialog-title-text {
-    width: 100px;
+    width: 100%;
     margin: 0;
   }
 }

@@ -17,7 +17,7 @@ const routes: Routes = [
       {
         path: 'create',
         component: EventEntryDialogComponent,
-        data: { create: true }
+        data: { create: true },
       }
     ]
   },

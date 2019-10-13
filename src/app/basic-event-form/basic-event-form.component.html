@@ -3,19 +3,26 @@
     <mat-label>Name</mat-label>
     <input matInput placeholder="Name" formControlName="name" />
   </mat-form-field>
-  <mat-form-field appearance="fill">
-    <input
-      matInput
-      [matDatepicker]="picker"
-      placeholder="Event date"
-      formControlName="eventDate"
-    />
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-   
+  <div class="flex-container">
+    <mat-form-field appearance="fill">
+      <input
+        matInput
+        [matDatepicker]="picker"
+        placeholder="Event date"
+        formControlName="eventDate"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <input matInput mode="time" placeholder="Event time" hidden />
-      <dp-date-picker matInput mode="time" placeholder="Event time" formControlName="eventTime" theme="dp-material" ></dp-date-picker>
+      <dp-date-picker
+        matInput
+        mode="time"
+        placeholder="Event time"
+        formControlName="eventTime"
+        theme="dp-material"
+      ></dp-date-picker>
     </mat-form-field>
+  </div>
 </form>

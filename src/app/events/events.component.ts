@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { EventService } from '../event.service';
 import { EventType } from '../models/app.model';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-events',
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./events.component.scss']
 })
 export class EventsComponent implements OnInit {
+  @ViewChild(RouterOutlet, { static: false }) outlet: RouterOutlet;
 
   eventType = EventType;
 
@@ -20,6 +21,7 @@ export class EventsComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.outlet);
   }
 
 }

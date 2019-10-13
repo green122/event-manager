@@ -1,5 +1,4 @@
-<mat-dialog-title
-  >
+<mat-dialog-title>
   <p class="dialog-title-text">Create {{ type }}</p>
   <div class="icon-wrapper">
     <mat-icon mat-dialog-close>close</mat-icon>
@@ -7,12 +6,16 @@
 </mat-dialog-title>
 <div class="editor-container">
   <app-form-manager
-    [event]="event$ | async"
+    [event]="event"
     [type]="type"
     [submitText]="getSubmitText(type)"
     (submitData)="submitData($event)"
   >
     <app-basic-event-form #formContent></app-basic-event-form>
-    <app-call-form #formContent></app-call-form>
+    <app-call-form *ngIf="type === eventType.CALL" #formContent></app-call-form>
+    <app-meeting-form
+      *ngIf="type === eventType.MEETING"
+      #formContent
+    ></app-meeting-form>
   </app-form-manager>
 </div>

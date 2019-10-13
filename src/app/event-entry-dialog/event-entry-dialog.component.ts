@@ -3,6 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { EventEditorComponent } from '../event-editor/event-editor.component';
 import { EventService } from '../event.service';
+import { tap, take, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { TEvent } from '../models/app.model';
 
 @Component({
   selector: 'app-event-entry-dialog',
@@ -14,8 +17,7 @@ export class EventEntryDialogComponent implements OnInit {
     private readonly router: Router,
     private readonly eventService: EventService,
     public dialog: MatDialog,
-    private readonly route: ActivatedRoute,
-    private readonly changeDetector: ChangeDetectorRef
+    private readonly route: ActivatedRoute
   ) {
     this.openDialog();
   }
@@ -23,13 +25,36 @@ export class EventEntryDialogComponent implements OnInit {
   openDialog() {
     const create = this.route.snapshot.data.create;
     const id = this.route.snapshot.params.id;
-    const dialogRef = this.dialog.open(EventEditorComponent, {
-      data: {create, id}
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.router.navigate(['/']);
-      this.changeDetector.detectChanges();
-    });
+
+    const type = this.eventService.getEventType();
+    const wrongRoute = (create && !type) || (!create && !id);
+
+    if (wrongRoute) {
+      setTimeout(() => this.router.navigate(['/']));
+      return;
+    }
+
+    const event$ = create
+      ? of({} as TEvent)
+      : this.eventService.getEventById(id);
+
+    event$
+      .pipe(
+        tap(event => {
+          const dialogRef = this.dialog.open(EventEditorComponent, {
+            data: { create, id, event, type }
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            this.router.navigate(['/']);
+          });
+        }),
+        take(1),
+        catchError(() => {
+          this.router.navigate(['/']);
+          return of({} as TEvent);
+        })
+      )
+      .subscribe();
   }
 
   ngOnInit() {}

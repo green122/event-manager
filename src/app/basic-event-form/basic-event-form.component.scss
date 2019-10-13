@@ -1,11 +1,21 @@
 .mat-form-field {
   display: block;
+  &:not(:first-child) {
+      margin-left: 10px;
+  }
 }
 
-dp-date-picker ::ng-deep {
+.flex-container {
+  display: flex;
+}
+
+dp-date-picker.dp-material ::ng-deep {
   .dp-picker-input {
     background: none;
     border: none;
-    font-size: 14px;
+    font-size: 16px;
+    height: 17px;
   }
 }
+
+

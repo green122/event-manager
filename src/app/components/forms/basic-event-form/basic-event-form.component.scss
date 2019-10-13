@@ -1,5 +1,6 @@
 .mat-form-field {
   display: block;
+  flex-grow: 1;
   &:not(:first-child) {
       margin-left: 10px;
   }
@@ -7,6 +8,9 @@
 
 .flex-container {
   display: flex;
+  @media (max-width: 520px) {
+    display: block;
+  }
 }
 
 dp-date-picker.dp-material ::ng-deep {

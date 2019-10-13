@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { catchError, map, takeWhile } from 'rxjs/operators';
 import { EventService } from '../event.service';
 import { TEvent, AbstractFormData, EventType } from '../models/app.model';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({

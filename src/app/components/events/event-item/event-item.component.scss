@@ -4,9 +4,13 @@ mat-card {
 }
 
 mat-card-actions {
-  position: absolute;
+  @media (min-width: 520px) {
+    position: absolute;
+  }
+  position: static;
   right: 20px;
   top: 10px;
+ 
 }
 
 .card-title {

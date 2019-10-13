@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { TEvent, IMeeting } from '../models/app.model';
-import { EventService } from '../event.service';
+import { TEvent, IMeeting } from '../../../models/app.model';
+import { EventService } from '../../../event.service';
 
 @Component({
   selector: 'app-meeting-item',

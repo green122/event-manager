@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { TEvent, IForm, ICall, IMeeting } from '../models/app.model';
+import { TEvent, IForm, ICall, IMeeting } from '../../../models/app.model';
 // import { get } from 'lodash';
 
 @Component({
@@ -13,17 +13,22 @@ export class MeetingFormComponent implements OnInit, IForm {
   constructor(private readonly formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.form = this.formBuilder.group(
-      {
-        address: '',
-        participants: this.formBuilder.array(['', '', ''])
-      }
-      // ['', Validators.compose([Validators.required, Validators.email])],
-    );
+    this.form = this.formBuilder.group({
+      address: ['', Validators.required],
+      participants: this.formBuilder.array([
+        ['', Validators.required],
+        ['', Validators.required],
+        ['', Validators.required]
+      ])
+    });
   }
 
   getForm() {
     return this.form;
+  }
+
+  getParticipantError(index: number) {
+    return (this.form.controls.participants as FormArray).controls[index].errors;
   }
 
   setValues(event: TEvent) {

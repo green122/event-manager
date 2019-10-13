@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { EventService } from '../event.service';
-import { EventType } from '../models/app.model';
+import { EventService } from '../../../event.service';
+import { EventType } from '../../../models/app.model';
 import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -21,7 +21,6 @@ export class EventsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.outlet);
   }
 
 }

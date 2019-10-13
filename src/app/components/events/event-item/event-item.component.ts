@@ -6,7 +6,8 @@ import {
   Output,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { TEvent, EventType } from '../models/app.model';
+import { TEvent, EventType } from '../../../models/app.model';
+import { getDateTimeString, getDateString } from 'src/utils/getDateString';
 
 @Component({
   selector: 'app-event-item',
@@ -26,33 +27,14 @@ export class EventItemComponent implements OnInit {
       return;
     }
     const { eventDate, eventTime } = this.event;
-    const dateLocale = eventDate.toLocaleDateString('en-EN', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      weekday: 'long'
-    });
-    const dateTimeZone = eventDate
-      .toLocaleDateString('en-EN', {
-        timeZoneName: 'short'
-      })
-      .split(' ')
-      .slice(1);
-    return `${dateLocale} ${eventTime} ${dateTimeZone}`;
+    return getDateTimeString(eventDate, eventTime);
   }
 
   createdDateString() {
     if (!this.event) {
       return;
-    };
-    return this.event.createdDate.toLocaleDateString('en-EN', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      weekday: 'long',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+    }
+    return getDateString(this.event.eventDate);
   }
   constructor() {}
   ngOnInit() {}

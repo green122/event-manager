@@ -9,7 +9,7 @@ import {
   EventEmitter,
   Output
 } from '@angular/core';
-import { IForm, TEvent } from '../models/app.model';
+import { IForm, TEvent } from '../../../models/app.model';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { Observable, from } from 'rxjs';
 import { tap, map, startWith, withLatestFrom, take } from 'rxjs/operators';

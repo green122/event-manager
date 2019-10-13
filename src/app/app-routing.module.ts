@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { EventListComponent } from './event-list/event-list.component';
+import { EventListComponent } from './components/events/event-list/event-list.component';
 import { EventEntryDialogComponent } from './event-entry-dialog/event-entry-dialog.component';
-import { EventsComponent } from './events/events.component';
+import { EventsComponent } from './components/events/events/events.component';
 import { CanActivateGuard } from './can-activate.guard';
 
 const routes: Routes = [

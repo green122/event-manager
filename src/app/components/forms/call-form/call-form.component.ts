@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { TEvent, IForm, ICall } from '../models/app.model';
+import { TEvent, IForm, ICall } from '../../../models/app.model';
 // import { get } from 'lodash';
 
 @Component({
@@ -13,12 +13,16 @@ export class CallFormComponent implements OnInit, IForm {
   constructor(private readonly formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.form = this.formBuilder.array(
-      ['', '']
-      // ['', Validators.compose([Validators.required, Validators.email])],
-    );
+    this.form = this.formBuilder.array([
+      ['', Validators.compose([Validators.required, Validators.email])],
+      ['', Validators.compose([Validators.required, Validators.email])]
+    ]);
   }
 
+  getParticipantError(index) {
+    const control = this.form.controls[index];
+    return control && control.hasError('email') ? 'Wrong email format' : 'Required';
+  }
   getForm() {
     return this.form;
   }

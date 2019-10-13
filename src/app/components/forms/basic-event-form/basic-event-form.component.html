@@ -2,6 +2,9 @@
   <mat-form-field appearance="fill" class="form-field">
     <mat-label>Name</mat-label>
     <input matInput placeholder="Name" formControlName="name" />
+    <mat-error *ngIf="form.controls.name.errors">
+      Required
+    </mat-error>
   </mat-form-field>
   <div class="flex-container">
     <mat-form-field appearance="fill">
@@ -13,6 +16,9 @@
       />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="form.controls.eventDate.errors">
+        Required
+      </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <input matInput mode="time" placeholder="Event time" hidden />
@@ -23,6 +29,9 @@
         formControlName="eventTime"
         theme="dp-material"
       ></dp-date-picker>
+      <mat-error *ngIf="form.controls.eventTime.errors">
+        Required
+      </mat-error>
     </mat-form-field>
   </div>
 </form>

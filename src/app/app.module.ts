@@ -5,20 +5,21 @@ import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EventListComponent } from './event-list/event-list.component';
-import { EventItemComponent } from './event-item/event-item.component';
+import { EventListComponent } from './components/events/event-list/event-list.component';
+import { EventItemComponent } from './components/events/event-item/event-item.component';
 import { EventEditorComponent } from './event-editor/event-editor.component';
-import { FormManagerComponent } from './form-manager/form-manager.component';
-import { BasicEventFormComponent } from './basic-event-form/basic-event-form.component';
-import { MeetingItemComponent } from './meeting-item/meeting-item.component';
+import { FormManagerComponent } from './components/forms/form-manager/form-manager.component';
+import { BasicEventFormComponent } from './components/forms/basic-event-form/basic-event-form.component';
+import { MeetingItemComponent } from './components/events/meeting-item/meeting-item.component';
 import { CallItemComponent } from './call-item/call-item.component';
-import { CallFormComponent } from './call-form/call-form.component';
+import { CallFormComponent } from './components/forms/call-form/call-form.component';
 import { EventEntryDialogComponent } from './event-entry-dialog/event-entry-dialog.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import {DpDatePickerModule} from 'ng2-date-picker';
-import { EventsComponent } from './events/events.component';
-import { MeetingFormComponent } from './meeting-form/meeting-form.component';
+import { EventsComponent } from './components/events/events/events.component';
+import { MeetingFormComponent } from './components/forms/meeting-form/meeting-form.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { MeetingFormComponent } from './meeting-form/meeting-form.component';
     BrowserAnimationsModule,
     DpDatePickerModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     MaterialModule,
     MatDialogModule,

@@ -1,0 +1,18 @@
+<form [formGroup]="form">
+  <div class="flex-container">
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Participant 1</mat-label>
+      <input matInput placeholder="Email" [formControlName]="0" />
+      <mat-error *ngIf="form.controls[0].errors">
+          {{getParticipantError(0)}}
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Participant 2</mat-label>
+      <input matInput placeholder="Email" [formControlName]="1" />
+      <mat-error *ngIf="form.controls[1].errors">
+          {{getParticipantError(1)}}
+        </mat-error>
+    </mat-form-field>
+  </div>
+</form>

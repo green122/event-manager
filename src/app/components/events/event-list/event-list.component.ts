@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { TEvent } from '../models/app.model';
-import { EventService } from '../event.service';
+import { TEvent } from '../../../models/app.model';
+import { EventService } from '../../../event.service';
 import { Observable } from 'rxjs';
 import { Router, RouterOutlet } from '@angular/router';
 

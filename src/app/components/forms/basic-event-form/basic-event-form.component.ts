@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { IForm, TEvent } from '../models/app.model';
+import { IForm, TEvent } from '../../../models/app.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -15,8 +15,8 @@ export class BasicEventFormComponent implements OnInit, IForm {
   ngOnInit() {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
-      eventDate: '',
-      eventTime: '01:00:00'
+      eventDate: ['', Validators.required],
+      eventTime: ['01:00:00', Validators.required]
     });
   }
 
@@ -28,7 +28,7 @@ export class BasicEventFormComponent implements OnInit, IForm {
     const { name, eventDate, eventTime } = event;
     this.form.patchValue({ name, eventDate, eventTime });
   }
-
+  
   getValues() {
     const { eventTime } = this.form.value;
 

@@ -49,7 +49,7 @@ export class EventEditorComponent {
     this.type = data.type || data.event.type;
   }
 
-  getSubmitText(type: EventType) {
+  getSubmitText(type: EventType | '') {
     return this.create ? `Create ${type}` : `Update ${type}`;
   }
 }

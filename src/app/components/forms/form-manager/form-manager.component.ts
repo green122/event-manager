@@ -11,10 +11,12 @@ import {
 } from '@angular/core';
 import { IForm, TEvent } from '../../../models/app.model';
 import { FormArray, FormBuilder } from '@angular/forms';
-import { Observable, from } from 'rxjs';
-import { tap, map, startWith, withLatestFrom, take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { FormManagerService } from './form-manager.service';
 
+// we use this component as 'master' component that collects all the children subforms and composes it in one and 
+// manages it via IForm interface
 @Component({
   selector: 'app-form-manager',
   templateUrl: './form-manager.component.html',

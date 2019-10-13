@@ -20,9 +20,10 @@ mat-card-actions {
   }
 }
 
-.event-name {
+mat-card-subtitle.event-name {
   font-size: 16px;
-  font-weight: bolder;
+  font-weight: bolder;  
+  margin-top: 15px;
 }
 
 .mat-card-footer {

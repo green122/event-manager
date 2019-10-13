@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {
   CanActivateChild,
   ActivatedRouteSnapshot,
-  RouterStateSnapshot,
   UrlTree,
   Router
 } from '@angular/router';
@@ -25,7 +24,7 @@ export class CanActivateGuard implements CanActivateChild {
     | boolean
     | UrlTree {
     const { create } = next.data;
-    const { id } =next.params;
+    const { id } = next.params;
     const type = this.eventService.getEventType();
     const wrongRoute = (create && !type) || (!create && !id);
     if (wrongRoute) {

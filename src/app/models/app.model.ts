@@ -1,4 +1,5 @@
 export enum EventType {
+  NOOP =  '',
   CALL = 'Call',
   MEETING = 'Meeting'
 }

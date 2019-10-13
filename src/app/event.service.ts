@@ -9,23 +9,23 @@ const fakeEvents: TEvent[] = [
   {
     id: '000',
     type: EventType.CALL,
-    name: 'nameAAA',
+    name: 'Very important call',
     eventDate: new Date(),
     eventTime: '07:34:10',
     createdDate: new Date(),
-    participants: [{ email: 'ww@cc.com' }, { email: 'dd@dd.cc' }]
+    participants: [{ email: 'test@test.com' }, { email: 'somemail@mail.com' }]
   },
   {
     id: '001',
     type: EventType.MEETING,
-    name: 'name',
+    name: 'How to conquer the world!!! (Bi-weekly, retrospective)',
     eventTime: '07:34:00',
     eventDate: new Date(),
     createdDate: new Date(),
     participants: [
-      { name: 'ww@cc.com' },
-      { name: 'dd@dd.cc' },
-      { name: 'ww@cc.com' }
+      { name: 'Darth Vader' },
+      { name: 'Princess Leia' },
+      { name: 'Jackie Chan' }
     ],
     address: 'Potsdamer Platz'
   }
@@ -36,17 +36,20 @@ const fakeEvents: TEvent[] = [
 })
 export class EventService {
   private events: TEvent[] = fakeEvents;
-  private draft: EventType | '' = '';
+  private draft: EventType = EventType.NOOP;
 
   private events$ = new BehaviorSubject<TEvent[]>(fakeEvents);
   constructor(private snackBar: MatSnackBar, private apiService: ApiService) {}
+
   fetchEvents() {
     return this.events$.asObservable();
   }
+
   deleteEventId(eventId: string) {
     const newEvents = this.events.filter(({ id }) => id !== eventId);
     this.events$.next(newEvents);
   }
+
   getEventById(eventId: string) {
     const event = this.events.find(({ id }) => id === eventId);
     return from(

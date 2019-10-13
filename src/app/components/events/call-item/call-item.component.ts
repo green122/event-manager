@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TEvent } from '../models/app.model';
+import { TEvent } from '../../../models/app.model';
 
 
 @Component({

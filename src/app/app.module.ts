@@ -11,7 +11,7 @@ import { EventEditorComponent } from './event-editor/event-editor.component';
 import { FormManagerComponent } from './components/forms/form-manager/form-manager.component';
 import { BasicEventFormComponent } from './components/forms/basic-event-form/basic-event-form.component';
 import { MeetingItemComponent } from './components/events/meeting-item/meeting-item.component';
-import { CallItemComponent } from './call-item/call-item.component';
+
 import { CallFormComponent } from './components/forms/call-form/call-form.component';
 import { EventEntryDialogComponent } from './event-entry-dialog/event-entry-dialog.component';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -20,6 +20,7 @@ import {DpDatePickerModule} from 'ng2-date-picker';
 import { EventsComponent } from './components/events/events/events.component';
 import { MeetingFormComponent } from './components/forms/meeting-form/meeting-form.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CallItemComponent } from './components/events/call-item/call-item.component';
 
 @NgModule({
   declarations: [

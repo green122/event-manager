@@ -28,14 +28,13 @@ export class BasicEventFormComponent implements OnInit, IForm {
     const { name, eventDate, eventTime } = event;
     this.form.patchValue({ name, eventDate, eventTime });
   }
-  
+
   getValues() {
     const { eventTime } = this.form.value;
 
     return {
       ...this.form.value,
-      eventTime:
-        eventTime.format ? eventTime.format('hh:mm:ss') : eventTime
+      eventTime: eventTime.format ? eventTime.format('hh:mm:ss') : eventTime
     };
   }
 }

@@ -32,6 +32,7 @@ export class MeetingFormComponent implements OnInit, IForm {
       return;
     }
     this.form.patchValue({
+      address,
       participants: [
         participants[0].name,
         participants[1].name,
@@ -42,7 +43,7 @@ export class MeetingFormComponent implements OnInit, IForm {
 
   getValues() {
     return {
-      participants: this.form.value.participants.map(email => ({ email })),
+      participants: this.form.value.participants.map(name => ({ name })),
       address: this.form.value.address
     };
   }

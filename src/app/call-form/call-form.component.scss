@@ -1,0 +1,14 @@
+mat-form-field {
+  display: block;
+  &:not(:first-child) {
+    margin-left: 10px;
+  }
+}
+
+.flex-container {
+  display: flex;
+}
+
+.form-field {
+  flex-grow: 1;
+}

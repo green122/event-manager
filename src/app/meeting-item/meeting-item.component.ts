@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TEvent, IMeeting } from '../models/app.model';
 import { EventService } from '../event.service';
 
@@ -7,16 +7,11 @@ import { EventService } from '../event.service';
   templateUrl: './meeting-item.component.html',
   styleUrls: ['./meeting-item.component.scss']
 })
-export class MeetingItemComponent implements OnInit {
+export class MeetingItemComponent {
   @Input() event: TEvent;
-  constructor(private readonly eventService: EventService) { }
-
-  ngOnInit() {
-    console.log(this.event);
-  }
+  constructor(private readonly eventService: EventService) {}
 
   goToMapApp() {
     this.eventService.goToMapApp((this.event as IMeeting).address);
   }
-
 }

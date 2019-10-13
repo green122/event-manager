@@ -9,19 +9,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BasicEventFormComponent implements OnInit, IForm {
-
   form: FormGroup;
-  constructor(private readonly formBuilder: FormBuilder) { }
+  constructor(private readonly formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.form = this.formBuilder.group(
-      {
-        name: ['', Validators.required],
-        eventDate: '',
-        eventTime: ''
-      }
-    );
-   }
+    this.form = this.formBuilder.group({
+      name: ['', Validators.required],
+      eventDate: '',
+      eventTime: '01:00:00'
+    });
+  }
 
   getForm() {
     return this.form;
@@ -29,10 +26,16 @@ export class BasicEventFormComponent implements OnInit, IForm {
 
   setValues(event: TEvent) {
     const { name, eventDate, eventTime } = event;
-    this.form.patchValue({name, eventDate, eventTime});
+    this.form.patchValue({ name, eventDate, eventTime });
   }
 
   getValues() {
-    return this.form.value;
+    const { eventTime } = this.form.value;
+
+    return {
+      ...this.form.value,
+      eventTime:
+        eventTime.format ? eventTime.format('hh:mm:ss') : eventTime
+    };
   }
 }

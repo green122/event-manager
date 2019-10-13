@@ -21,7 +21,11 @@ const fakeEvents: TEvent[] = [
     eventTime: '07:34:00',
     eventDate: new Date(),
     createdDate: new Date(),
-    participants: [{ name: 'ww@cc.com' }, { name: 'dd@dd.cc' }, { name: 'ww@cc.com' }],
+    participants: [
+      { name: 'ww@cc.com' },
+      { name: 'dd@dd.cc' },
+      { name: 'ww@cc.com' }
+    ],
     address: 'Potsdamer Platz'
   }
 ];
@@ -89,7 +93,8 @@ export class EventService {
     return from(
       new Promise<TEvent>((resolve, reject) => {
         if (eventIndex > -1) {
-          this.events[eventIndex] = eventData;
+          const prevEvent = this.events[eventIndex];
+          this.events[eventIndex] = { ...prevEvent, ...eventData };
           this.events$.next(this.events);
           resolve();
         } else {
@@ -99,7 +104,7 @@ export class EventService {
     );
   }
 
-  goToMapApp(address: string){
+  goToMapApp(address: string) {
     const addressRequest = address.replace(/\s\s+/g, '+');
     window.open(`//maps.google.com/maps/search/${addressRequest}`, '_blank');
   }

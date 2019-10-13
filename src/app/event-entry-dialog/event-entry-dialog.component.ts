@@ -18,22 +18,13 @@ export class EventEntryDialogComponent implements OnInit {
     private readonly eventService: EventService,
     public dialog: MatDialog,
     private readonly route: ActivatedRoute
-  ) {
-    this.openDialog();
-  }
+  ) {}
 
-  openDialog() {
+  ngOnInit() {
     const create = this.route.snapshot.data.create;
     const id = this.route.snapshot.params.id;
 
     const type = this.eventService.getEventType();
-    const wrongRoute = (create && !type) || (!create && !id);
-
-    if (wrongRoute) {
-      setTimeout(() => this.router.navigate(['/']));
-      return;
-    }
-
     const event$ = create
       ? of({} as TEvent)
       : this.eventService.getEventById(id);
@@ -56,6 +47,4 @@ export class EventEntryDialogComponent implements OnInit {
       )
       .subscribe();
   }
-
-  ngOnInit() {}
 }

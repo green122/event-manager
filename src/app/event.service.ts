@@ -45,9 +45,9 @@ export class EventService {
     return this.events$.asObservable();
   }
 
-  deleteEventId(eventId: string) {
-    const newEvents = this.events.filter(({ id }) => id !== eventId);
-    this.events$.next(newEvents);
+  deleteEventById(eventId: string) {
+    this.events = this.events.filter(({ id }) => id !== eventId);
+    this.events$.next(this.events);
   }
 
   getEventById(eventId: string) {

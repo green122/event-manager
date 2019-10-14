@@ -4,6 +4,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.8.
 
+The installation is very simple:
 ## First install Angular Command Line Interface
 `npm install -g @angular/cli`
 

@@ -7,6 +7,9 @@
 
 mat-card-content {
   display: flex;
+  @media (max-width: 500px) {
+    display: block;
+  }
 }
 
 .participants-label {

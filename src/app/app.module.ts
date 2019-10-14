@@ -16,11 +16,12 @@ import { CallFormComponent } from './components/forms/call-form/call-form.compon
 import { EventEntryDialogComponent } from './event-entry-dialog/event-entry-dialog.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
-import {DpDatePickerModule} from 'ng2-date-picker';
+import { DpDatePickerModule } from 'ng2-date-picker';
 import { EventsComponent } from './components/events/events/events.component';
 import { MeetingFormComponent } from './components/forms/meeting-form/meeting-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CallItemComponent } from './components/events/call-item/call-item.component';
+import { ConfirmComponent } from './components/shared/confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { CallItemComponent } from './components/events/call-item/call-item.compo
     CallFormComponent,
     EventEntryDialogComponent,
     EventsComponent,
-    MeetingFormComponent
+    MeetingFormComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -47,9 +49,9 @@ import { CallItemComponent } from './components/events/call-item/call-item.compo
     ReactiveFormsModule,
     MaterialModule,
     MatDialogModule,
-    MatNativeDateModule,
+    MatNativeDateModule
   ],
-  entryComponents: [EventEditorComponent],
+  entryComponents: [EventEditorComponent, ConfirmComponent],
   providers: [FormBuilder],
   schemas: [NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]

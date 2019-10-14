@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { EventService } from './event.service';
 import { take, switchMap } from 'rxjs/operators';
 import { ApiService } from './api.service';
+import { cold } from 'jasmine-marbles';
 import { of } from 'rxjs';
 import { TEvent } from './models/app.model';
 import { MatSnackBar } from '@angular/material/snack-bar';

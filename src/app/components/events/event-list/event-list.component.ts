@@ -19,7 +19,7 @@ export class EventListComponent implements OnInit {
   ) {}
 
   onDelete(id: string) {
-    this.eventService.deleteEventId(id);
+    this.eventService.deleteEventById(id);
   }
 
   onEdit(id: string) {
